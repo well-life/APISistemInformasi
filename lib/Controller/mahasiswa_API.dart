@@ -38,15 +38,18 @@ class MahasiswaAPI{
     };
   }
 
-  static Future<void> editMahasiswa({String? name, String? foto, String? nim, String? jurusan}) async {
-    final http.Response response = await http.put(Uri.parse(baseUrl));
-    body: jsonEncode(<String, String?>{
-      "name": name,
-      "foto": foto,
-      "createdAt": DateTime.now().toIso8601String(),
-      "nim": nim,
-      "jurusan": jurusan
-    });
+  static Future<void> editMahasiswa({String? id, String? name, String? foto, String? nim, String? jurusan}) async {
+    final response = await client.put(Uri.parse(baseUrl+'$id'),
+        body: {
+        "name": name,
+        "foto": foto,
+        "createdAt": DateTime.now().toIso8601String(),
+        "nim": nim,
+        "jurusan": jurusan
+        }
+      );
+      final body = json.decode(response.body.toString());
+      print(body);
     if (response.statusCode == 200) {
      // return Mahasiswa.fromJSON(jsonDecode(response.body));
     };

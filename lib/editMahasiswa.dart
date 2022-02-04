@@ -121,10 +121,10 @@ class _EditMahasiswaScreenState extends State<EditMahasiswaScreen> {
                     height: 40.0,
                     color: Theme.of(context).secondaryHeaderColor,
                     onPressed: () async{
-                      await MahasiswaAPI.editMahasiswa(name: nama?.text, foto: foto?.text, nim: nim?.text,
+                      await MahasiswaAPI.editMahasiswa(id: widget.mahasiswa!.id.toString(), name: nama?.text, foto: foto?.text, nim: nim?.text,
                       jurusan: jurusan?.text);
-                      Navigator.pop(context, widget.refresh);
-                      
+                      Navigator.pop(context);
+                      widget.refresh();
                     },
                   ),
                 )
