@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mahasiswa_api/Controller/mahasiswa_API.dart';
 import 'package:mahasiswa_api/Model/mahasiswa_model.dart';
+import 'package:mahasiswa_api/editMahasiswa.dart';
 import 'package:mahasiswa_api/screenAdd.dart';
+
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,20 +15,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   @override
+
   void initState() {
     super.initState();
     setState(() { 
       MahasiswaAPI.getMahasiswa();
+
     });
   }
 
   void refresh(){
     MahasiswaAPI.getMahasiswa();
     setState(() {
-      
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,9 +72,11 @@ class _HomeState extends State<Home> {
             return ListTile(
               title: Text(listItem?.name ?? ''),
               subtitle: Text(listItem?.createdAt ?? ''),
-              // onTap: () async{
-              //   await Navigator.popAndPushNamed(context, );
-              // },
+              onTap: () async{
+                await Navigator.push(context, MaterialPageRoute(builder: 
+                (context) => EditMahasiswaScreen(refresh: refresh, mahasiswa: listItem)));
+                print(listItem);              
+              },
               trailing: IconButton(
                 onPressed: () async{
                     await MahasiswaAPI.deleteMahasiswa(listItem?.id);

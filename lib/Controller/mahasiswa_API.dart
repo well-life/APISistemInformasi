@@ -38,8 +38,8 @@ class MahasiswaAPI{
     };
   }
 
-  static Future<void> editMahasiswa(String? id, String? name, String? foto, String? nim, String? jurusan) async {
-    final http.Response response = await http.put(Uri.parse(baseUrl+'$id'));
+  static Future<void> editMahasiswa({String? name, String? foto, String? nim, String? jurusan}) async {
+    final http.Response response = await http.put(Uri.parse(baseUrl));
     body: jsonEncode(<String, String?>{
       "name": name,
       "foto": foto,
